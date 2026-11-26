@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>World news — Wednesday, 25 November 2026</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; width: 1024px; height: 1024px; overflow: hidden; }
+  body {
+    background: #F6F1E7;
+    color: #111827;
+    font-family: 'Albert Sans', 'Liberation Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+  .page {
+    width: 1024px; height: 1024px; padding: 22px 28px;
+    display: flex; flex-direction: column; gap: 8px;
+    background: #F6F1E7;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { height: 112px; flex: none; display: flex; flex-direction: column; justify-content: space-between; }
+  .mast-top, .mast-foot { display: flex; justify-content: space-between; align-items: center; }
+  .mast-top { font: 800 14px/1 'Albert Sans', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #B91C1C; }
+  .mast-top .left::before { content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 10px; background: #B91C1C; }
+  .mast-date {
+    font: 48px/1.2 'Alfa Slab One', serif; letter-spacing: -.025em;
+    white-space: nowrap; color: #111827;
+  }
+  .mast-rule { height: 7px; background: #111827; border-bottom: 3px solid #B91C1C; flex: none; }
+  .mast-foot { font: 700 13px/1 'Albert Sans', sans-serif; letter-spacing: .11em; text-transform: uppercase; color: #334155; }
+
+  /* ---------- hero ---------- */
+  .hero { height: 300px; flex: none; display: flex; background: #FFFCF4; border: 2px solid #111827; }
+  .hero-text { width: 57%; padding: 15px 20px 14px; display: flex; flex-direction: column; }
+  .kicker { font: 800 14px/1.1 'Albert Sans', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #B91C1C; }
+  .hero h1 {
+    margin: 8px 0 6px; font: 38px/1.06 'Archivo Black', 'Liberation Sans', sans-serif;
+    letter-spacing: -.025em; text-transform: uppercase; color: #111827;
+  }
+  .hero .deck { margin: 0; font: 600 16px/1.16 'Alegreya Sans', sans-serif; color: #334155; }
+  .hero .loc {
+    margin-top: auto; padding-top: 8px; border-top: 3px solid #D97706;
+    font: 800 13px/1.1 'Albert Sans', sans-serif; letter-spacing: .12em;
+    text-transform: uppercase; color: #0F766E;
+  }
+  .hero-art { width: 43%; border-left: 2px solid #111827; background: #BFD9DB; overflow: hidden; }
+  .hero-art svg { display: block; width: 100%; height: 100%; }
+
+  /* ---------- four story grid ---------- */
+  .middle { height: 356px; flex: none; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 174px 174px; gap: 8px; }
+  .panel, .bpanel { background: #FFFCF4; border: 2px solid #111827; display: flex; flex-direction: column; overflow: hidden; }
+  .bar {
+    height: 24px; flex: none; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 9px; color: #F6F1E7; font: 800 12px/1 'Albert Sans', sans-serif;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .bar.crimson { background: #B91C1C; }
+  .bar.teal { background: #0F766E; }
+  .bar.amber { background: #D97706; }
+  .bar.slate { background: #334155; }
+  .bar .bar-right { font-size: 11px; letter-spacing: .06em; opacity: .92; }
+  .panel-body { flex: 1; min-height: 0; display: flex; }
+  .art { width: 33%; flex: none; border-right: 2px solid #111827; background: #DCE8E4; overflow: hidden; }
+  .art svg { display: block; width: 100%; height: 100%; }
+  .copy { flex: 1; min-width: 0; padding: 8px 10px; display: flex; flex-direction: column; }
+  .copy h2 {
+    margin: 0 0 4px; font: 22px/1.06 'Archivo Black', 'Liberation Sans', sans-serif;
+    letter-spacing: -.025em; text-transform: uppercase; color: #111827;
+  }
+  .copy p { margin: 0; font: 600 14px/1.12 'Alegreya Sans', sans-serif; color: #334155; }
+
+  /* ---------- space story ---------- */
+  .china { height: 126px; flex: none; display: flex; border: 2px solid #111827; background: #FFFCF4; }
+  .china-art { width: 28%; flex: none; border-right: 2px solid #111827; background: #111827; overflow: hidden; }
+  .china-art svg { display: block; width: 100%; height: 100%; }
+  .china-copy { flex: 1; min-width: 0; padding: 8px 14px; display: flex; flex-direction: column; justify-content: center; }
+  .china-copy .kicker { font-size: 13px; margin-bottom: 5px; }
+  .china-copy h2 {
+    margin: 0 0 5px; font: 26px/1 'Archivo Black', 'Liberation Sans', sans-serif;
+    letter-spacing: -.025em; text-transform: uppercase; color: #111827;
+  }
+  .china-copy p { margin: 0; font: 600 15px/1.2 'Alegreya Sans', sans-serif; color: #334155; }
+  .china-copy .tag { margin-top: 6px; font: 800 12px/1 'Albert Sans', sans-serif; letter-spacing: .1em; color: #0F766E; text-transform: uppercase; }
+
+  /* ---------- bottom ticker ---------- */
+  .ticker { height: 52px; flex: none; display: flex; border: 2px solid #111827; background: #111827; }
+  .ticker-label {
+    width: 112px; flex: none; background: #B91C1C; display: flex; align-items: center; justify-content: center;
+    color: #F6F1E7; font: 800 13px/1 'Albert Sans', sans-serif; letter-spacing: .12em;
+  }
+  .ticker-text {
+    flex: 1; min-width: 0; padding: 6px 12px; display: flex; align-items: center;
+    color: #F6F1E7; font: 600 15px/1.18 'Alegreya Sans', sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div class="mast-top">
+      <span class="left">The world in one day</span>
+      <span>Global edition · No. 25/11</span>
+    </div>
+    <div class="mast-date">WEDNESDAY · 25 NOVEMBER 2026</div>
+    <div class="mast-rule"></div>
+    <div class="mast-foot">
+      <span>Conflict · Disaster · Security · Science · Labour</span>
+      <span>Global dispatch · Wednesday edition</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <div class="kicker">Energy / Conflict — Strait of Hormuz</div>
+      <h1>Two tankers explode on mines in Strait of Hormuz</h1>
+      <p class="deck">Iran's IRGC says two oil tankers on an &ldquo;unauthorized route&rdquo; hit naval mines and caught fire. Houthis claim a strike on Saudi Arabia's Ras Tanura refinery.</p>
+      <div class="loc">Shipping route ablaze · refinery strike claimed</div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 416 296" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two burning oil tankers in the Strait of Hormuz channel, a naval mine and a refinery tower at Ras Tanura">
+        <rect width="416" height="296" fill="#F6F1E7"/>
+        <circle cx="344" cy="40" r="25" fill="#D97706" opacity=".85"/>
+
+        <path d="M0 0h96l-14 42 18 38-22 56 12 62H0z" fill="#334155"/>
+        <path d="M416 0h-92l16 40-20 34 24 52-14 50h86z" fill="#334155"/>
+        <text x="14" y="42" font-family="Albert Sans, sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#F6F1E7">IRAN</text>
+        <text x="322" y="44" font-family="Albert Sans, sans-serif" font-size="10" font-weight="800" letter-spacing="1" fill="#F6F1E7">SAUDI ARABIA</text>
+
+        <path d="M0 126c58-16 104-14 154 2s96 16 144-2 78-16 118-4v174H0z" fill="#0F766E"/>
+        <g fill="none" stroke="#F6F1E7" stroke-width="2" opacity=".55">
+          <path d="M8 158c28-10 52-10 78 0s50 10 76 0 52-10 78 0 52 10 84 0"/>
+          <path d="M8 198c28-10 52-10 78 0s50 10 76 0 52-10 78 0 52 10 84 0"/>
+          <path d="M8 246c28-10 52-10 78 0s50 10 76 0 52-10 78 0 52 10 84 0"/>
+        </g>
+
+        <g transform="translate(310 60)">
+          <rect x="0" y="30" width="12" height="44" fill="#111827"/>
+          <rect x="16" y="14" width="14" height="60" fill="#111827"/>
+          <rect x="34" y="36" width="10" height="38" fill="#111827"/>
+          <path d="M23 14V4" stroke="#111827" stroke-width="3"/>
+          <path d="M23 6l-8-13 8 5 4-13 7 17z" fill="#B91C1C" stroke="#D97706" stroke-width="2"/>
+          <rect x="0" y="74" width="52" height="5" fill="#111827"/>
+          <text x="26" y="91" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="9" font-weight="800" letter-spacing=".4" fill="#F6F1E7">RAS TANURA</text>
+        </g>
+
+        <g transform="translate(22 166) rotate(-7 70 28)">
+          <path d="M0 30h150l-14 24H14z" fill="#111827"/>
+          <rect x="18" y="14" width="84" height="16" fill="#334155"/>
+          <rect x="106" y="2" width="26" height="28" fill="#111827"/>
+          <rect x="24" y="18" width="12" height="8" fill="#D97706"/>
+          <rect x="44" y="18" width="12" height="8" fill="#B91C1C"/>
+          <rect x="64" y="18" width="12" height="8" fill="#D97706"/>
+          <path d="M50 14c-10-18 9-22 2-38 18 13 21 28 11 38z" fill="#D97706" stroke="#B91C1C" stroke-width="2"/>
+          <path d="M78 14c-8-14 7-19 2-31 14 11 16 22 9 31z" fill="#B91C1C"/>
+        </g>
+
+        <g transform="translate(160 220) rotate(7 66 26)">
+          <path d="M0 26h138l-13 22H13z" fill="#111827"/>
+          <rect x="16" y="12" width="76" height="14" fill="#334155"/>
+          <rect x="96" y="0" width="24" height="26" fill="#111827"/>
+          <rect x="22" y="16" width="12" height="7" fill="#B91C1C"/>
+          <rect x="42" y="16" width="12" height="7" fill="#D97706"/>
+          <path d="M46 12c-9-16 8-20 2-34 16 12 19 24 10 34z" fill="#D97706" stroke="#B91C1C" stroke-width="2"/>
+          <path d="M72 12c-7-12 6-16 2-26 12 9 14 18 8 26z" fill="#B91C1C"/>
+        </g>
+
+        <g transform="translate(252 170)">
+          <g stroke="#111827" stroke-width="4" stroke-linecap="round">
+            <path d="M0-19v38M-19 0h38M-13-13l26 26M13-13l-26 26"/>
+          </g>
+          <circle r="12" fill="#111827"/>
+          <circle r="4" fill="#B91C1C"/>
+          <text x="0" y="34" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="10" font-weight="800" fill="#111827">MINE</text>
+        </g>
+
+        <g transform="translate(24 268)">
+          <rect x="0" y="-17" width="166" height="24" fill="#111827"/>
+          <text x="83" y="0" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="#F6F1E7">STRAIT OF HORMUZ</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="middle">
+
+    <article class="panel">
+      <div class="bar crimson"><span>Egypt / Disaster</span><span class="bar-right">Cairo highway</span></div>
+      <div class="panel-body">
+        <div class="art">
+          <svg viewBox="0 0 158 148" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An overturned fuel tanker, flames, burning cars and an emergency light on a Cairo highway">
+            <rect width="158" height="148" fill="#DCE8E4"/>
+            <rect y="108" width="158" height="40" fill="#334155"/>
+            <path d="M0 120h158" stroke="#F6F1E7" stroke-width="2" opacity=".7"/>
+            <g transform="translate(10 46) rotate(-25 58 28)">
+              <rect x="0" y="16" width="104" height="30" rx="14" fill="#0F766E" stroke="#111827" stroke-width="3"/>
+              <rect x="88" y="20" width="16" height="22" fill="#111827"/>
+              <rect x="8" y="24" width="14" height="14" fill="#F6F1E7"/>
+              <circle cx="24" cy="48" r="8" fill="#111827"/>
+              <circle cx="76" cy="48" r="8" fill="#111827"/>
+            </g>
+            <path d="M26 104c-13-22 10-27 2-48 23 15 27 34 14 48z" fill="#D97706" stroke="#B91C1C" stroke-width="2"/>
+            <path d="M62 102c-10-17 8-21 2-37 18 12 20 25 11 37z" fill="#B91C1C"/>
+            <g fill="#111827">
+              <path d="M98 118h26l5-12H96z"/><rect x="102" y="106" width="9" height="8" fill="#B91C1C"/>
+              <circle cx="104" cy="120" r="4" fill="#334155"/><circle cx="119" cy="120" r="4" fill="#334155"/>
+              <path d="M132 122h18l4-9h-20z"/><rect x="135" y="113" width="7" height="7" fill="#D97706"/>
+              <circle cx="137" cy="124" r="3" fill="#334155"/><circle cx="148" cy="124" r="3" fill="#334155"/>
+            </g>
+            <g transform="translate(126 66)">
+              <rect x="0" y="12" width="4" height="22" fill="#111827"/>
+              <path d="M-5 12h14l-3-7H2z" fill="#D97706" stroke="#B91C1C" stroke-width="1.5"/>
+              <path d="M2 5l-4-8 5 3 2-7 4 9z" fill="#B91C1C"/>
+            </g>
+            <text x="8" y="17" font-family="Albert Sans, sans-serif" font-size="11" font-weight="800" letter-spacing="1" fill="#111827">CAIRO</text>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Fuel-truck fire on Cairo highway kills at least 30</h2>
+          <p>A fuel truck overturned on a busy highway, setting vehicles ablaze; the toll could rise.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="bar slate"><span>Europe / War</span><span class="bar-right">Libya · Odesa</span></div>
+      <div class="panel-body">
+        <div class="art">
+          <svg viewBox="0 0 158 148" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A drone above a warship in a Libyan port with the Odesa skyline behind">
+            <rect width="158" height="148" fill="#DCE8E4"/>
+            <rect y="20" width="158" height="74" fill="#F6F1E7"/>
+            <g fill="#334155">
+              <rect x="6" y="54" width="16" height="40"/><rect x="24" y="42" width="14" height="52"/>
+              <path d="M24 42l7-12 7 12z"/><rect x="40" y="60" width="18" height="34"/>
+              <path d="M40 60l9-9 9 9z"/><rect x="60" y="48" width="12" height="46"/>
+              <path d="M60 48l6-10 6 10z"/>
+            </g>
+            <text x="6" y="32" font-family="Albert Sans, sans-serif" font-size="10" font-weight="800" letter-spacing="1" fill="#111827">ODESA</text>
+            <rect y="94" width="158" height="54" fill="#0F766E"/>
+            <g fill="none" stroke="#F6F1E7" stroke-width="1.5" opacity=".55"><path d="M6 110h38M64 118h34M112 108h40"/></g>
+            <g transform="translate(68 88)">
+              <path d="M0 26h84l-11 18H12z" fill="#111827"/>
+              <rect x="24" y="10" width="26" height="16" fill="#334155"/>
+              <rect x="52" y="4" width="18" height="22" fill="#111827"/>
+              <path d="M33 10V0" stroke="#111827" stroke-width="2"/>
+              <rect x="16" y="18" width="8" height="5" fill="#B91C1C"/>
+              <text x="42" y="55" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="9" font-weight="800" fill="#F6F1E7">BENGHAZI</text>
+            </g>
+            <g transform="translate(118 36)" stroke="#111827" stroke-width="2.5" fill="#111827">
+              <path d="M-16-9L16 9M16-9L-16 9"/>
+              <circle cx="-16" cy="-9" r="5" fill="none"/><circle cx="16" cy="-9" r="5" fill="none"/>
+              <circle cx="-16" cy="9" r="5" fill="none"/><circle cx="16" cy="9" r="5" fill="none"/>
+              <rect x="-6" y="-4" width="12" height="8" rx="2"/>
+            </g>
+            <path d="M118 52L106 92" stroke="#B91C1C" stroke-width="2" stroke-dasharray="4 4"/>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Drone hits Russian ship in Libya as war widens</h2>
+          <p>Two Libyan naval officers died in the Benghazi strike; Russian attack kills 2 in Odesa region. Putin vows retaliation for refinery strikes.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="bar teal"><span>Middle East / Gaza</span><span class="bar-right">Security · Health</span></div>
+      <div class="panel-body">
+        <div class="art">
+          <svg viewBox="0 0 158 148" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gaza city skyline, a drone and a medical cross marking a meningitis epidemic alert">
+            <rect width="158" height="148" fill="#DCE8E4"/>
+            <rect y="18" width="158" height="76" fill="#F6F1E7"/>
+            <g fill="#334155">
+              <path d="M6 94V54l10-8 9 8v40z"/><path d="M28 94V40l12-10 12 10v54z"/>
+              <path d="M56 94V62l9-9 10 9-5 9 6 8v24z"/>
+              <path d="M80 94V46l14-12 13 12v48z"/><path d="M112 94V58l10-9 11 9v36z"/>
+              <path d="M138 94V66l8-7 10 7v28z"/>
+            </g>
+            <g fill="#F6F1E7" opacity=".8"><rect x="33" y="50" width="5" height="6"/><rect x="43" y="50" width="5" height="6"/><rect x="87" y="56" width="5" height="6"/><rect x="98" y="56" width="5" height="6"/></g>
+            <text x="6" y="30" font-family="Albert Sans, sans-serif" font-size="11" font-weight="800" letter-spacing="1.5" fill="#111827">GAZA</text>
+            <rect y="94" width="158" height="54" fill="#334155"/>
+            <g transform="translate(112 38)" stroke="#111827" stroke-width="2.5" fill="#111827">
+              <path d="M-15-8L15 8M15-8L-15 8"/>
+              <circle cx="-15" cy="-8" r="4.5" fill="none"/><circle cx="15" cy="-8" r="4.5" fill="none"/>
+              <circle cx="-15" cy="8" r="4.5" fill="none"/><circle cx="15" cy="8" r="4.5" fill="none"/>
+              <rect x="-5" y="-4" width="10" height="8" rx="2"/>
+            </g>
+            <path d="M112 54L94 84" stroke="#B91C1C" stroke-width="2" stroke-dasharray="4 4"/>
+            <g transform="translate(32 116)">
+              <circle r="16" fill="#F6F1E7" stroke="#111827" stroke-width="2"/>
+              <path d="M-3-11h6v8h8v6H3v8h-6V3h-8v-6h8z" fill="#B91C1C"/>
+            </g>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Israeli strikes kill Hamas security chief</h2>
+          <p>Israel says it killed Mohammad Abuelouf, head of Hamas' interior security service; Gaza declares a meningitis epidemic alert.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="bar amber"><span>Americas / Colombia</span><span class="bar-right">Cartagena</span></div>
+      <div class="panel-body">
+        <div class="art">
+          <svg viewBox="0 0 158 148" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Cartagena supermarket facade behind a police cordon after the siege ended">
+            <rect width="158" height="148" fill="#DCE8E4"/>
+            <rect x="12" y="22" width="134" height="82" fill="#F6F1E7" stroke="#111827" stroke-width="3"/>
+            <rect x="18" y="28" width="122" height="18" fill="#0F766E"/>
+            <text x="79" y="41" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="11" font-weight="800" letter-spacing="1" fill="#F6F1E7">SUPERMARKET</text>
+            <g fill="#BFD9DB" stroke="#334155" stroke-width="2"><rect x="22" y="56" width="30" height="30"/><rect x="64" y="56" width="30" height="30"/><rect x="106" y="56" width="30" height="30"/></g>
+            <g stroke="#334155" stroke-width="1.5"><path d="M37 56v30M79 56v30M121 56v30"/></g>
+            <path d="M66 104V86h26v18" fill="#D97706" stroke="#111827" stroke-width="2"/>
+            <g transform="rotate(-8 79 118)">
+              <rect x="0" y="110" width="158" height="12" fill="#D97706" stroke="#111827" stroke-width="2"/>
+              <g fill="#111827"><rect x="10" y="113" width="18" height="6"/><rect x="46" y="113" width="18" height="6"/><rect x="82" y="113" width="18" height="6"/><rect x="118" y="113" width="18" height="6"/></g>
+            </g>
+            <g fill="#334155">
+              <circle cx="24" cy="94" r="6"/><path d="M16 104h16l4 20H12z"/>
+              <circle cx="136" cy="94" r="6"/><path d="M128 104h16l4 20h-24z"/>
+            </g>
+            <text x="79" y="16" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="10" font-weight="800" letter-spacing="1.5" fill="#111827">CARTAGENA</text>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Hostages freed after Cartagena supermarket siege</h2>
+          <p>Security forces storm the shopping centre after a daylong siege; all hostages rescued, police say.</p>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <article class="china">
+    <div class="china-art">
+      <svg viewBox="0 0 270 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Chinese space station and the Shenzhou-24 capsule beside a simple crescent-and-star flag motif">
+        <rect width="270" height="120" fill="#111827"/>
+        <g fill="#F6F1E7" opacity=".75"><circle cx="34" cy="22" r="1.4"/><circle cx="82" cy="14" r="1"/><circle cx="150" cy="28" r="1.2"/><circle cx="212" cy="16" r="1"/><circle cx="250" cy="44" r="1.4"/><circle cx="118" cy="48" r="1"/><circle cx="26" cy="80" r="1"/></g>
+        <g transform="translate(14 12)">
+          <rect width="36" height="24" fill="#F6F1E7" stroke="#F6F1E7" stroke-width="1.5"/>
+          <rect width="11" height="24" fill="#0F766E"/>
+          <path d="M21 5a7 7 0 1 0 0 12 5.5 5.5 0 1 1 0-12z" fill="#0F766E"/>
+          <path d="M29 5l1.2 2.6 2.8.4-2 2 .5 2.8-2.5-1.4-2.5 1.4.5-2.8-2-2 2.8-.4z" fill="#0F766E"/>
+        </g>
+        <g transform="translate(86 50)">
+          <rect x="0" y="-12" width="100" height="24" fill="#F6F1E7" stroke="#111827" stroke-width="2"/>
+          <rect x="34" y="-20" width="30" height="40" fill="#334155" stroke="#F6F1E7" stroke-width="2"/>
+          <rect x="-34" y="-14" width="32" height="28" fill="#0F766E" stroke="#F6F1E7" stroke-width="2"/>
+          <rect x="100" y="-14" width="32" height="28" fill="#0F766E" stroke="#F6F1E7" stroke-width="2"/>
+          <g stroke="#F6F1E7" stroke-width="1" opacity=".75"><path d="M-26-14v28M-18-14v28M108-14v28M116-14v28"/></g>
+          <path d="M50-20v-12M50 20v12" stroke="#F6F1E7" stroke-width="2"/>
+          <circle cx="50" cy="-34" r="4" fill="#D97706"/><circle cx="50" cy="34" r="4" fill="#D97706"/>
+          <text x="50" y="4" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="9" font-weight="800" letter-spacing="1" fill="#111827">SPACE STATION</text>
+        </g>
+        <g transform="translate(226 50) rotate(-18)">
+          <path d="M0-9h30l9 9-9 9H0z" fill="#F6F1E7" stroke="#D97706" stroke-width="2"/>
+          <rect x="8" y="-5" width="10" height="10" fill="#0F766E"/>
+          <path d="M-14 0h14" stroke="#D97706" stroke-width="3"/>
+          <text x="18" y="24" text-anchor="middle" font-family="Albert Sans, sans-serif" font-size="9" font-weight="800" fill="#F6F1E7">SHENZHOU-24</text>
+        </g>
+      </svg>
+    </div>
+    <div class="china-copy">
+      <div class="kicker">Science / China</div>
+      <h2>China sends its first foreign astronaut to its space station</h2>
+      <p>A Pakistani astronaut joins the Shenzhou-24 crew for 90+ experiments.</p>
+      <div class="tag">Space station · Shenzhou-24 crew</div>
+    </div>
+  </article>
+
+  <footer class="ticker">
+    <div class="ticker-label">Also today</div>
+    <div class="ticker-text">Greece: 24-hour strike over living costs, 14,000 march in Athens · US: Army detonates 5 tonnes of lead explosives at Iowa plant · EU: Socialists and Liberals suspend coalition talks</div>
+  </footer>
+
+</div>
+</body>
+</html>
